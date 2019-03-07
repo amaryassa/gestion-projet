@@ -3,6 +3,23 @@
       <h2>Créer un compte</h2>
       <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
+          <label for="prenom">prénom</label>
+          <input type="text"
+                 id="prenom"
+                 maxlength="20"
+                 class="form-control"
+                 formControlName="prenom">
+        </div>
+        <div class="form-group">
+          <label for="nom">nom</label>
+          <input type="text"
+                 id="nom"
+                 maxlength="20"
+                 class="form-control"
+                 formControlName="nom">
+        </div>
+
+        <div class="form-group">
           <label for="email">Adresse mail</label>
           <input type="text"
                  id="email"

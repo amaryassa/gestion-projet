@@ -26,23 +26,27 @@ export class SignUpComponent implements OnInit {
   }
   initForm() {
     //on doit utlisé ces variable la dans les input de html formControlName="email"
-    this.signUpForm= this.formBuilder.group({
+    this.signUpForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email ]],
-      password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/) ]]
+      password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/) ]],
+      nom: ['', [Validators.required, Validators.maxLength(20) ]],
+      prenom: ['', [Validators.required, Validators.maxLength(20) ]]
     });
   }
 
 onSubmit() {
   const email = this.signUpForm.get('email').value;
   const password = this.signUpForm.get('password').value;
-  this.authService.createNewUser(email, password).then(
+  const nom = this.signUpForm.get('nom').value;
+  const prenom = this.signUpForm.get('prenom').value;
+  this.authService.createNewUser(email, password, nom, prenom).then(
     () => {
       this.router.navigate(['/connexion']);
     },
     (error) => {
       this.errorMessage = error;
     }
-  )
+  );
 }
 
 }

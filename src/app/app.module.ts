@@ -10,7 +10,7 @@ import { SignInComponent } from './authentification/sign-in/sign-in.component';
 
 
 // Firebase services + enviorment module
-import * as firebase from 'firebase'
+import * as firebase from 'firebase';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
