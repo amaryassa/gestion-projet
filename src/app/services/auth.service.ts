@@ -8,8 +8,30 @@ export class AuthService  {
 
   constructor() { }
 
+    addInformationsUser(userId ,  email: string , nom: string , prenom: string) {
+    firebase.database().ref('users').push({
+        nom: nom,
+        email: email,
+        prenom: prenom
+    });
+}
+
   // singUP
 
+    createNewUser(email: string, password: string , nom: string , prenom: string){
+        return new Promise<any>((resolve, reject) => {
+            firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password)
+                .then(res => {
+                    this.addInformationsUser(res.user.uid, email, nom, prenom);
+                    resolve(res);
+                }, err => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
+
+/*
   createNewUser(email: string, password: string , nom: string , prenom: string) {
   return new Promise(
     (resolve, reject) => {
@@ -38,6 +60,7 @@ export class AuthService  {
     }
   );
   }
+*/
 
   // connexion
 
@@ -55,6 +78,9 @@ export class AuthService  {
       }
     );
   }
+
+
+  // déconnexion
 
   signOutUser() {
     firebase.auth().signOut();

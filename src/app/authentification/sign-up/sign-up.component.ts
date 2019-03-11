@@ -41,7 +41,7 @@ onSubmit() {
   const prenom = this.signUpForm.get('prenom').value;
   this.authService.createNewUser(email, password, nom, prenom).then(
     () => {
-      this.router.navigate(['/connexion']);
+      this.router.navigate(['/projets']);
     },
     (error) => {
       this.errorMessage = error;

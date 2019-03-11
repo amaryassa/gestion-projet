@@ -3,11 +3,16 @@ import { SignInComponent } from './authentification/sign-in/sign-in.component';
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {AuthGuardService} from './services/auth-guard.service';
+import {ProjectsComponent} from './projects/projects.component';
 
 
 const routes: Routes = [
-  { path: 'connexion', component: SignInComponent },
-  { path: 'inscription', component: SignUpComponent }
+  { path: 'authentification/signin', component: SignInComponent },
+  { path: 'authentification/signup', component: SignUpComponent },
+  { path: 'projets', canActivate: [AuthGuardService], component: ProjectsComponent },
+  { path: '', canActivate: [AuthGuardService], redirectTo: 'projets', pathMatch: 'full'},
+  { path: '**', canActivate: [AuthGuardService], redirectTo: 'projets'}
 ];
 
 @NgModule({

@@ -33,12 +33,13 @@ export class SignInComponent implements OnInit {
     console.log('submit');
     this.authService.signInUser(email, password).then(
       () => {
-        this.router.navigate(['/']);
+        console.log('Connexion');
+        this.router.navigate(['/projets']);
       },
       (error) => {
         this.errorMessage = error;
       }
-    )
+    );
   }
 
 }

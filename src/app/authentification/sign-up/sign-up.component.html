@@ -2,7 +2,7 @@
     <div class="col-sm-8 col-sm-offset-2">
       <h2>Créer un compte</h2>
       <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
+        <div class="form-group col-sm-6">
           <label for="prenom">prénom</label>
           <input type="text"
                  id="prenom"
@@ -10,7 +10,7 @@
                  class="form-control"
                  formControlName="prenom">
         </div>
-        <div class="form-group">
+        <div class="form-group  col-sm-6">
           <label for="nom">nom</label>
           <input type="text"
                  id="nom"
@@ -19,14 +19,14 @@
                  formControlName="nom">
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-sm-12">
           <label for="email">Adresse mail</label>
           <input type="text"
                  id="email"
                  class="form-control"
                  formControlName="email">
         </div>
-        <div class="form-group">
+        <div class="form-group col-sm-12">
           <label for="password">Mot de passe</label>
           <input type="password"
                  id="password"

@@ -14,6 +14,8 @@ import * as firebase from 'firebase';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 // import { AngularFireDatabaseModule } from '@angular/fire/auth';
 
@@ -26,7 +28,9 @@ firebase.initializeApp( environment.firebase);
     ProjectsComponent,
     ProjectsFormComponent,
     SignUpComponent,
-    SignInComponent
+    SignInComponent,
+    HeaderComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
