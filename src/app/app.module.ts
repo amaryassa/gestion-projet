@@ -10,17 +10,17 @@ import { SignInComponent } from './authentification/sign-in/sign-in.component';
 
 
 // Firebase services + enviorment module
-import * as firebase from 'firebase';
 import { environment } from '../environments/environment';
-import { AngularFireModule } from '@angular/fire';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { UserListComponent } from './user-list/user-list.component';
 
-// import { AngularFireDatabaseModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
-firebase.initializeApp( environment.firebase);
 
 @NgModule({
   declarations: [
@@ -34,10 +34,13 @@ firebase.initializeApp( environment.firebase);
   ],
   imports: [
     BrowserModule,
+      AngularFireModule.initializeApp(environment.firebaseConfig), // imports firebase/app needed for everything
+      AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+      AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+      AngularFireStorageModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule,
-
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

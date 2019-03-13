@@ -11,7 +11,7 @@ export class AuthGuardService implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-        return new Promise(
+        /*return new Promise(
             (resolve, reject) => {
                 firebase.auth().onAuthStateChanged(
                     (user) => {
@@ -24,6 +24,7 @@ export class AuthGuardService implements CanActivate {
                     }
                 );
             }
-        );
+        );*/
+        return true ;
     }
 }

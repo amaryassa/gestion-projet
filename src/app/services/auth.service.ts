@@ -1,28 +1,26 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
+import { auth } from  'firebase/app';
+import { AngularFireAuth } from  "@angular/fire/auth";
+import { User } from  'firebase';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService  {
 
-  constructor() { }
+  constructor(public  afAuth:  AngularFireAuth) { }
 
-    addInformationsUser(userId ,  email: string , nom: string , prenom: string) {
-    firebase.database().ref('users').push({
-        nom: nom,
-        email: email,
-        prenom: prenom
-    });
-}
 
-  // singUP
-
-    createNewUser(email: string, password: string , nom: string , prenom: string){
+    // singUP
+        createNewUser(email: string, password: string , nom: string , prenom: string){
         return new Promise<any>((resolve, reject) => {
-            firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password)
+            // this.afAuth.auth.signInWithEmailAndPassword(email, password)
+            this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(email, password)
                 .then(res => {
-                    this.addInformationsUser(res.user.uid, email, nom, prenom);
+                    console.log(res);
+                    // this.addInformationsUser(res.user.uid, email, nom, prenom);
                     resolve(res);
                 }, err => {
                     console.log(err);
@@ -31,36 +29,14 @@ export class AuthService  {
         });
     }
 
-/*
-  createNewUser(email: string, password: string , nom: string , prenom: string) {
-  return new Promise(
-    (resolve, reject) => {
-      firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password)
-          .then(
-              (data) => {
-                  firebase.database().ref('/users/' + data.user.uid).set({
-                      nom: nom,
-                      prenom: prenom,
-                      email: data.user.email,
-                      uid: data.user.uid
-                  });
-              },
-              (error) => {
-                  reject(error);
-              }
-              )
-          .then(
-              () => {
-                  resolve();
-                  },
-              (error) => {
-                  reject(error);
-              }
-      );
-    }
-  );
-  }
-*/
+
+
+
+
+
+
+
+
 
   // connexion
 

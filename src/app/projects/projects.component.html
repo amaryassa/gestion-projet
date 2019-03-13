@@ -5,14 +5,14 @@
   <li class="list-group-item-heading">{{utilisateur?.prenom}}</li>
 </ul>-->
 
+<h1>AMar</h1>
 
+<div class="list-group">
+  <button class="list-group-item" *ngFor=" let user of users | async">
+    <h3 class="list-group-item-heading">{{user.email}}
 
-<!--<div class="list-group">-->
-  <!--<button class="list-group-item" *ngFor=" let  user of users">-->
-    <!--<h3 class="list-group-item-heading">{{user.email}}-->
-
-    <!--</h3>-->
-    <!--&lt;!&ndash;<p class="list-group-item-text">{{util.uid}}</p>-->
-  <!--</button>-->
-<!--</div>-->
-<!--&ndash;&gt;-->
+    </h3>
+      Amar
+    <p class="list-group-item-text">{{util.uid}}</p>
+  </button>
+</div>

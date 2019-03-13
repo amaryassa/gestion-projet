@@ -33,6 +33,16 @@ export class SignUpComponent implements OnInit {
       prenom: ['', [Validators.required, Validators.maxLength(20) ]]
     });
   }
+/*onSubmit() {
+  const email = this.signUpForm.get('email').value;
+  const password = this.signUpForm.get('password').value;
+  const nom = this.signUpForm.get('nom').value;
+  const prenom = this.signUpForm.get('prenom').value;
+
+  this.authService.createNewUser(email, password, nom, prenom);
+}*/
+
+
 
 onSubmit() {
   const email = this.signUpForm.get('email').value;
