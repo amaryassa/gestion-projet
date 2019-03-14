@@ -2,20 +2,21 @@ import { Router, CanActivate } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate {
 
-    constructor(private router: Router) { }
+    constructor(private router: Router,  private afAuth:  AngularFireAuth) { }
 
     canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-        /*return new Promise(
+        return new Promise(
             (resolve, reject) => {
-                firebase.auth().onAuthStateChanged(
+                this.afAuth.auth.onAuthStateChanged(
                     (user) => {
-                        if(user){
+                        if (user) {
                             resolve(true); // on laisse le user, il a le droit de passer sur cette route
                         } else {
                             this.router.navigate(['/authentification', 'signin']);
@@ -24,7 +25,7 @@ export class AuthGuardService implements CanActivate {
                     }
                 );
             }
-        );*/
-        return true ;
+        );
+        // return true ;
     }
 }

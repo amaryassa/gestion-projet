@@ -11,7 +11,7 @@ import {ProjectsComponent} from './projects/projects.component';
 const routes: Routes = [
   { path: 'authentification/signin', component: SignInComponent },
   { path: 'authentification/signup', component: SignUpComponent },
-  { path: 'utilisateurs', component: UserListComponent},
+  { path: 'utilisateurs', canActivate: [AuthGuardService], component: UserListComponent},
   { path: 'projets', canActivate: [AuthGuardService], component: ProjectsComponent },
   { path: '', canActivate: [AuthGuardService], redirectTo: 'projets', pathMatch: 'full'},
   { path: '**', canActivate: [AuthGuardService], redirectTo: 'projets'}

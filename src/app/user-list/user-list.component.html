@@ -1,6 +1,11 @@
+<h1>Liste des utilisateurs </h1>
+Length: {{(users | async)?.length}}
 <ul>
-  <li class="text" *ngFor="let item of users">
-    {{item.prenom}} - {{item.nom}}
+  <li class="text" *ngFor="let user of users | async">
+    {{user.prenom}} - {{user.nom}} -  {{user.email}}
   </li>
+    <!--{{amar.prenom}}-->
 </ul>
-<div>Amar</div>
+nom: {{amar.nom}}
+
+Length: {{(amar | async)?.length}}

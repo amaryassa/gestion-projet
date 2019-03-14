@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {UsersService} from '../../services/users.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,7 +20,8 @@ export class SignUpComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private usersService: UsersService) { }
 
   ngOnInit() {
     this.initForm();
@@ -33,26 +35,25 @@ export class SignUpComponent implements OnInit {
       prenom: ['', [Validators.required, Validators.maxLength(20) ]]
     });
   }
-/*onSubmit() {
-  const email = this.signUpForm.get('email').value;
-  const password = this.signUpForm.get('password').value;
-  const nom = this.signUpForm.get('nom').value;
-  const prenom = this.signUpForm.get('prenom').value;
-
-  this.authService.createNewUser(email, password, nom, prenom);
-}*/
-
-
 
 onSubmit() {
   const email = this.signUpForm.get('email').value;
   const password = this.signUpForm.get('password').value;
   const nom = this.signUpForm.get('nom').value;
   const prenom = this.signUpForm.get('prenom').value;
-  this.authService.createNewUser(email, password, nom, prenom).then(
-    () => {
-      this.router.navigate(['/projets']);
-    },
+  this.authService.createNewUser(email, password, nom, prenom)
+      .then(
+          (res) => {
+            this.usersService.addUser(res.user.uid, nom, prenom, email);
+          },
+          (error) => {
+            this.errorMessage = error;
+          }
+      )
+      .then(
+      () => {
+        this.router.navigate(['/utilisateurs']);
+      },
     (error) => {
       this.errorMessage = error;
     }

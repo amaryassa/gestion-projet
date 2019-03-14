@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
       );
   }
   signOut() {
-    console.log("Déconnexion");
     this.authService.signOutUser();
 
   }

@@ -3,6 +3,7 @@ import { User } from './../models/User.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
+import {UsersService} from '../services/users.service';
 
 
 
@@ -14,21 +15,24 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class UserListComponent implements OnInit, OnDestroy {
 
-   // users: Observable <User[]>;
-  users : any[];
-  // items:  any[];
-  // items: Observable<any[]>;
-  constructor(private db: AngularFirestore) {
+   users: Observable <User[]>;
+   amar: any;
+
+  // users: user[];
+  constructor(private usersService: UsersService) {
 
   }
   ngOnInit() {
-    // this.items = this.db.collection('users').valueChanges();
-   this.db.collection('users').valueChanges().subscribe((user) => {
-     console.log(user);
-     this.users = user;
-   });
-    console.log('db.collection(users)', this.db.collection('users'));
-    console.log('this.items : ',this.users );
+    this.users = this.usersService.getUsers();
+    console.log('jsk', this.users );
+    this.amar = this.usersService.getOneUser('5oRU1sPQ9dSZ9JUlI75JlshpDCe2');
+    // console.log(this.amar);
+
+
+    // this.users = this.db.collection('users').valueChanges();
+    // this.db.collection('users').valueChanges().subscribe((user) => {
+   //   this.users = user;
+   // });
   }
 
 
