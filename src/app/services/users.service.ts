@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {User} from '../models/User.model';
 import {AngularFireList} from '@angular/fire/database';
+import {map} from 'rxjs/internal/operators';
 
 
 @Injectable({
@@ -10,14 +11,26 @@ import {AngularFireList} from '@angular/fire/database';
 })
 export class UsersService {
 
+
+
   constructor(  private db: AngularFirestore) { }
-  // getUsers(): Observable<User[]> {
-  getUsers(): Observable<User[]> {
-    // this.db.collection('users').valueChanges().subscribe((user) => {
-    //   this.users = user;
-    // });
-    return this.db.collection('users').valueChanges();
+  getUsers() {
+    return this.db.collection('users').snapshotChanges().subscribe(actionArray => {
+      actionArray.map(item => {
+     return {
+     id: item.payload.doc.id,
+     ...item.payload.doc.data()
+     } as User;
+     });
+    });
   }
+ /* getUsers() {
+    // return this.db.collection<User>('users').snapshotChanges();
+    return this.db.collection('users').snapshotChanges();
+  }*/
+  // getUsers(): Observable<User[]> {
+  //   // return this.db.collection<User>('users').valueChanges();
+  // }
 
   addUser(id: string, nom: string, prenom: string,  email: string) {
     this.db.collection('users').doc(id).set({
@@ -28,21 +41,4 @@ export class UsersService {
  }
 
 
-  getOneUser(id: string):  Observable<User> {
-    const noteRef: AngularFireList = this.db.doc('users/5oRU1sPQ9dSZ9JUlI75JlshpDCe2');
-    this.db.collection('users')
-        .where('nom', '==', 'yassa')
-        .limit(10)
-        .get()
-        .then(function(results) {
-          results.forEach(function(doc) {
-            console.log('message', doc.data());
-          });
-        });
-      // const docRef = this.db.collection('users').valueChanges().doc(id);
-      // docRef.get().then( (doc) => {
-      //   console.log(doc.data());
-      //   return doc.data();
-      // });
-      }
 }
