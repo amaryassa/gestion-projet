@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
                     this.usersService.getOneUser(user.uid)
                         .subscribe(item => {
                             this.currentUser = item.data();
-                            console.log(this.currentUser);
+                            // console.log(this.currentUser);
                     });
                     this.isAuth = true;
                 } else {
@@ -36,6 +36,5 @@ export class HeaderComponent implements OnInit {
   }
   signOut() {
     this.authService.signOutUser();
-
   }
 }

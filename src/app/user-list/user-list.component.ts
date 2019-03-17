@@ -6,7 +6,7 @@ import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 import {UsersService} from '../services/users.service';
 
 import {map} from 'rxjs/internal/operators';
-
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -21,7 +21,9 @@ export class UserListComponent implements OnInit, OnDestroy {
     users: User[];
     // users: Observable<DocumentChangeAction<User[]>[]>;
 
-  constructor(private usersService: UsersService, private db: AngularFirestore) {
+  constructor(private usersService: UsersService,
+              private db: AngularFirestore,
+              private toastr: ToastrService) {
   }
   ngOnInit() {
       // console.log(this.usersService.getUsers());
@@ -43,7 +45,8 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 onGetOneUser(id) {
   this.usersService.getOneUser(id).subscribe(item => {
-    console.log(item.data());
+    this.toastr.info(item.data().email, item.data().prenom + ' ' +item.data().nom);
+    // success(item.data().email, item.data().prenom + ' ' +item.data().nom);
   });
 }
 

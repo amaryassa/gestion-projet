@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {User} from '../models/User.model';
-import {AngularFireList} from '@angular/fire/database';
-import {map} from 'rxjs/internal/operators';
+
 
 
 @Injectable({

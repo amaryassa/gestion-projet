@@ -21,6 +21,8 @@ import { ProjetsListComponent } from './projets/projets-list/projets-list.compon
 import { ProjetsComponent } from './projets/projets.component';
 import { ProjetsFormComponent } from './projets/projets-form/projets-form.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { ProjetsFormComponent } from './projets/projets-form/projets-form.compon
       AngularFireStorageModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

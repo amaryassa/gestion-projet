@@ -1,3 +1,14 @@
-<p>
-  projets-list works!
-</p>
+<table class="table table-hover">
+  <thead>
+  <th>nom Projet</th>
+  <th>description Projet</th>
+
+  <th></th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let projet of projets">
+    <td (click)="onEdit(projet)">{{projet.nomProjet}}</td>
+    <td (click)="onEdit(projet)">{{projet.descriptionProjet}}</td>
+  </tr>
+  </tbody>
+</table>
