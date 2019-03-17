@@ -14,23 +14,15 @@ export class UsersService {
 
 
   constructor(  private db: AngularFirestore) { }
-  getUsers() {
-    return this.db.collection('users').snapshotChanges().subscribe(actionArray => {
-      actionArray.map(item => {
-     return {
-     id: item.payload.doc.id,
-     ...item.payload.doc.data()
-     } as User;
-     });
-    });
-  }
- /* getUsers() {
-    // return this.db.collection<User>('users').snapshotChanges();
-    return this.db.collection('users').snapshotChanges();
-  }*/
-  // getUsers(): Observable<User[]> {
-  //   // return this.db.collection<User>('users').valueChanges();
-  // }
+
+  getUsers(): Observable<DocumentChangeAction<User[]>[]> {
+ // return this.db.collection<User>('users').snapshotChanges();
+ return this.db.collection<User[]>('users').snapshotChanges();
+ }
+ getOneUser(id) {
+     return this.db.collection('users').doc(id).get();
+ }
+
 
   addUser(id: string, nom: string, prenom: string,  email: string) {
     this.db.collection('users').doc(id).set({

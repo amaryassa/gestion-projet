@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProjectsComponent } from './projects/projects.component';
-import { ProjectsFormComponent } from './projects/projects-form/projects-form.component';
 import { SignUpComponent } from './authentification/sign-up/sign-up.component';
 import { SignInComponent } from './authentification/sign-in/sign-in.component';
 
@@ -19,18 +17,22 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { ProjetsListComponent } from './projets/projets-list/projets-list.component';
+import { ProjetsComponent } from './projets/projets.component';
+import { ProjetsFormComponent } from './projets/projets-form/projets-form.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProjectsComponent,
-    ProjectsFormComponent,
     SignUpComponent,
     SignInComponent,
     HeaderComponent,
-    UserListComponent
+    UserListComponent,
+    ProjetsListComponent,
+    ProjetsComponent,
+    ProjetsFormComponent
   ],
   imports: [
     BrowserModule,

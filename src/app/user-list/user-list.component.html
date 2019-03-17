@@ -1,11 +1,9 @@
 <h1>Liste des utilisateurs </h1>
-<!--Length: {{(users)?.length}}-->
+Length: {{(users)?.length}}
 <ul>
-  <li class="text" *ngFor="let user of users ">
-      {{user.id}} {{user.prenom}} - {{user.nom}} -  {{user.email}}
+  <li class="text" *ngFor="let user of users" (click)='onGetOneUser(user.id)'>
+      <span >{{user.id}} {{user.prenom}} - {{user.nom}} -  {{user.email}} </span>
   </li>
-
-
 </ul>
 
 

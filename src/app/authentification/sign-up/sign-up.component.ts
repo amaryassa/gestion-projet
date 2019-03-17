@@ -42,6 +42,7 @@ onSubmit() {
   const nom = this.signUpForm.get('nom').value;
   const prenom = this.signUpForm.get('prenom').value;
   this.authService.createNewUser(email, password)
+
       .then(
           (res) => {
             this.usersService.addUser(res.user.uid, nom, prenom, email);

@@ -20,6 +20,7 @@ export class AuthService  {
             this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(email, password)
                 .then(res => {
                     console.log(res.user.uid);
+
                     resolve(res);
                 }, err => {
                     console.log(err);
@@ -28,6 +29,8 @@ export class AuthService  {
         });
     }
   // connexion
+
+
 
   signInUser(email: string, password: string) {
     return new Promise(
