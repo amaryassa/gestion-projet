@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProjetsFormComponent implements OnInit {
 
-  constructor( private projetsService: ProjetsService,
+  constructor( public projetsService: ProjetsService,
                private db: AngularFirestore,
                private toastr: ToastrService
   ) { }
