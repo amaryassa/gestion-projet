@@ -2,6 +2,7 @@
   <thead>
   <th>nom Projet</th>
   <th>description Projet</th>
+  <th>create By</th>
 
   <th></th>
   </thead>
@@ -9,6 +10,7 @@
   <tr *ngFor="let projet of projets">
     <td (click)="onEdit(projet)">{{projet.nomProjet}}</td>
     <td (click)="onEdit(projet)">{{projet.descriptionProjet}}</td>
+    <td (click)="onEdit(projet)">{{projet.createdBy?.prenom}}</td>
   </tr>
   </tbody>
 </table>

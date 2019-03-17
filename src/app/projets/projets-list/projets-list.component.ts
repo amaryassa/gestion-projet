@@ -20,7 +20,7 @@ export class ProjetsListComponent implements OnInit {
     this.projetsService.getProjets().subscribe(actionArray => {
 
       this.projets = actionArray.map(item => {
-        // console.log(item.payload.doc.data());
+        console.log(item.payload.doc.data());
         return {
           id: item.payload.doc.id,
           ...item.payload.doc.data()
