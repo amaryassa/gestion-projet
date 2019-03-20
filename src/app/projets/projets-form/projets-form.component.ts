@@ -34,7 +34,7 @@ getCurrentUSer(){
         if (user) {
           this.usersService.getOneUser(user.uid)
               .subscribe(item => {
-                this.currentUser = item.data();
+                this.currentUser  = Object.assign({id: user.uid},  item.data());
               });
         }
       }
@@ -53,17 +53,17 @@ getCurrentUSer(){
   onSubmit(form: NgForm) {
     let data = Object.assign({createdBy: this.currentUser},  form.value);
     delete data.id;
-
-
     if (form.value.id == null){
       this.db.collection('projets').add(data);
       this.toastr.success('Projet Enregistré avec succés ', 'Enregistrement');
     }
     else {
+      delete data.createdBy;
       this.db.doc('projets/' + form.value.id).update(data);
       this.toastr.success( 'Projet Modifié avec succés ', 'Modification');
     }
     this.resetForm(form);
   }
+
 
 }

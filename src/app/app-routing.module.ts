@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AuthGuardService} from './services/auth-guard.service';
 import {ProjetsComponent} from './projets/projets.component';
+import { TachesComponent } from './taches/taches.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'authentification/signup', component: SignUpComponent },
   { path: 'utilisateurs', canActivate: [AuthGuardService], component: UserListComponent},
   { path: 'projets', canActivate: [AuthGuardService], component: ProjetsComponent },
+  { path: 'projets/:id', canActivate: [AuthGuardService], component: TachesComponent },
   { path: '', canActivate: [AuthGuardService], redirectTo: 'projets', pathMatch: 'full'},
   { path: '**', canActivate: [AuthGuardService], redirectTo: 'projets'}
 ];

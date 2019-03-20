@@ -3,14 +3,19 @@
   <th>nom Projet</th>
   <th>description Projet</th>
   <th>create By</th>
+  <th>Consulter</th>
+  <th>Suppression</th>
 
-  <th></th>
   </thead>
-  <tbody>
-  <tr *ngFor="let projet of projets">
-    <td (click)="onEdit(projet)">{{projet.nomProjet}}</td>
-    <td (click)="onEdit(projet)">{{projet.descriptionProjet}}</td>
-    <td (click)="onEdit(projet)">{{projet.createdBy?.prenom}}</td>
-  </tr>
-  </tbody>
-</table>
+      <tbody>
+        <!-- <tr [ngClass]="{'amar': (currentUser?.id=== projet.createdBy.id) || (currentUser?.email=== projet.createdBy.email)}"   *ngFor="let projet of projets"> -->
+        <tr [ngClass]="((currentUser?.id=== projet.createdBy.id) || (currentUser?.email=== projet.createdBy.email))? 'MyProject' : '' "   *ngFor="let projet of projets">
+          <td (click)="onEdit(projet)" >{{projet.nomProjet}}</td>
+          <td (click)="onEdit(projet)" >{{projet.descriptionProjet}}</td>
+          <td (click)="onEdit(projet)" >{{projet.createdBy?.prenom}}</td>
+          <td (click)="onConsulte(projet)" ><i style='color:#28a745' class="far fa-arrow-alt-circle-right"></i></td>
+          <td *ngIf="(currentUser?.id=== projet.createdBy.id) || (currentUser?.email=== projet.createdBy.email) "  title='Delete' (click)="onDelete(projet.id)" > <i style='color:red' class="fas fa-trash-alt"></i></td>
+        </tr>
+      </tbody>
+  </table>
+

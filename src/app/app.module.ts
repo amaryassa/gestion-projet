@@ -23,6 +23,9 @@ import { ProjetsFormComponent } from './projets/projets-form/projets-form.compon
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { TachesComponent } from './taches/taches.component';
+import { TachesListComponent } from './taches/taches-list/taches-list.component';
+import { TachesFormComponent } from './taches/taches-form/taches-form.component';
 
 
 @NgModule({
@@ -34,7 +37,10 @@ import { ToastrModule } from 'ngx-toastr';
     UserListComponent,
     ProjetsListComponent,
     ProjetsComponent,
-    ProjetsFormComponent
+    ProjetsFormComponent,
+    TachesComponent,
+    TachesListComponent,
+    TachesFormComponent
   ],
   imports: [
     BrowserModule,

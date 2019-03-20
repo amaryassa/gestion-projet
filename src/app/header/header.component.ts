@@ -24,8 +24,7 @@ export class HeaderComponent implements OnInit {
                 if (user) {
                     this.usersService.getOneUser(user.uid)
                         .subscribe(item => {
-                            this.currentUser = item.data();
-                            // console.log(this.currentUser);
+                          this.currentUser  = Object.assign({id: user.uid},  item.data());
                     });
                     this.isAuth = true;
                 } else {

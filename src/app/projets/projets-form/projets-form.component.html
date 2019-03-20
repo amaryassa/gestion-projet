@@ -1,4 +1,7 @@
 <h1 class="display-4">Projet. Register</h1>
+<span (click)="resetForm()"  class='pull-right' *ngIf="projetsService.formData.id">
+    nouveau Projet <i class="fas fa-plus-circle fa-3x"></i>
+</span>
 <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
   <div class="form-group">
     <input type="hidden" name="id" #id="ngModel" [(ngModel)]="projetsService.formData.id">
@@ -23,7 +26,15 @@
 
 
   <div class="form-group">
-    <button *ngIf="projetsService.formData.id" type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">Update</button>
+    <button
+        *ngIf="projetsService.formData.id
+        && ((currentUser?.id=== projetsService.formData.createdBy.id) || (currentUser?.email=== projetsService.formData.createdBy.email))"
+        type="submit" [disabled]="form.invalid"
+        class="btn btn-lg btn-block btn-info">
+          Update
+    </button>
+
+
     <button *ngIf="!projetsService.formData.id" type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-success">Add</button>
   </div>
 

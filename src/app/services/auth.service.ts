@@ -19,11 +19,11 @@ export class AuthService  {
             // this.afAuth.auth.signInWithEmailAndPassword(email, password)
             this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(email, password)
                 .then(res => {
-                    console.log(res.user.uid);
+                    // console.log(res.user.uid);
 
                     resolve(res);
                 }, err => {
-                    console.log(err);
+                    // console.log(err);
                     reject(err);
                 });
         });
@@ -37,7 +37,7 @@ export class AuthService  {
       (resolve, reject) => {
           this.afAuth.auth.signInWithEmailAndPassword(email, password).then(
           (res) => {
-              console.log('Amar', res);
+              // console.log('Amar', res);
             resolve(res);
           },
           (error) => {
@@ -53,7 +53,7 @@ export class AuthService  {
 
   signOutUser() {
       this.afAuth.auth.signOut();
-      console.log('Déconnexion');
+      // console.log('Déconnexion');
   }
 
 

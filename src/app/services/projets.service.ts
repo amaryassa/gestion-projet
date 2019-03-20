@@ -13,4 +13,7 @@ export class ProjetsService {
   getProjets() {
     return this.db.collection('projets').snapshotChanges();
   }
+  deleteProjet(id: string) {
+    return this.db.doc('projets/' + id).delete();
+  }
 }
