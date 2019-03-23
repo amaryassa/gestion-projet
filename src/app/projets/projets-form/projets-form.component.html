@@ -1,41 +1,49 @@
-<h1 class="display-4">Projet. Register</h1>
-<span (click)="resetForm()"  class='pull-right' *ngIf="projetsService.formData.id">
-    nouveau Projet <i class="fas fa-plus-circle fa-3x"></i>
-</span>
-<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-  <div class="form-group">
-    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="projetsService.formData.id">
-    <input name="nomProjet"
-           #nomProjet="ngModel"
-           [(ngModel)]="projetsService.formData.nomProjet"
-           class="form-control"
-           placeholder="Nom du Projet"
-           required />
+<mat-card-content class="container-form" >
+    <mat-card-title>
+        <div class="div-title-register">
+            <h1 *ngIf="!projetsService.formData.id">Créer un nouveau projet</h1>
+            <h1 *ngIf="projetsService.formData.id">Modification du Projet</h1>
+            <button title="Ajout d'un nouveau projet"  *ngIf="projetsService.formData.id" (click)="resetForm()"  mat-fab>
+                <mat-icon aria-label="icon-button"> add_circle_outline </mat-icon>
+            </button>
+          </div>
 
-    <div *ngIf="nomProjet.invalid && nomProjet.touched" class="validation-error">This field is required.</div>
-  </div>
+    </mat-card-title>
+    <form   #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
 
-  <div class="form-group">
-      <input name="descriptionProjet"
+      <mat-form-field>
+        <input type="hidden" name="id" #id="ngModel" [(ngModel)]="projetsService.formData.id">
+        <input name="nomProjet"
+              #nomProjet="ngModel"
+              [(ngModel)]="projetsService.formData.nomProjet"
+              placeholder="Nom du Projet"
+              matInput
+              required />
+      </mat-form-field>
+      <mat-form-field >
+          <textarea name="descriptionProjet"
                 #descriptionProjet="ngModel"
                 [(ngModel)]="projetsService.formData.descriptionProjet"
-                class="form-control"
-                placeholder="descriptionProjet"/>
-  </div>
+                matInput placeholder="Description du projet">
+          </textarea>
+
+        </mat-form-field>
+      <button
+      *ngIf="projetsService.formData.id
+      && ((currentUser?.id=== projetsService.formData.createdBy.id) || (currentUser?.email=== projetsService.formData.createdBy.email))"
+      type="submit" [disabled]="form.invalid"
+      mat-raised-button class="update-button">
+
+        <mat-icon>edit</mat-icon> Modifier
+  </button>
 
 
+  <button *ngIf="!projetsService.formData.id" type="submit" [disabled]="form.invalid" mat-raised-button class="submit-button">
 
-  <div class="form-group">
-    <button
-        *ngIf="projetsService.formData.id
-        && ((currentUser?.id=== projetsService.formData.createdBy.id) || (currentUser?.email=== projetsService.formData.createdBy.email))"
-        type="submit" [disabled]="form.invalid"
-        class="btn btn-lg btn-block btn-info">
-          Update
-    </button>
+    <mat-icon>add_circle_outline</mat-icon> Créer
+  </button>
 
 
-    <button *ngIf="!projetsService.formData.id" type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-success">Add</button>
-  </div>
+    </form>
+  </mat-card-content>
 
-</form>

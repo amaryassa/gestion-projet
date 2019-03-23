@@ -17,7 +17,7 @@ export class AuthService  {
         createNewUser(email: string, password: string) {
         return new Promise<any>((resolve, reject) => {
             // this.afAuth.auth.signInWithEmailAndPassword(email, password)
-            this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(email, password)
+            this.afAuth.auth.createUserWithEmailAndPassword(email, password)
                 .then(res => {
                     // console.log(res.user.uid);
 

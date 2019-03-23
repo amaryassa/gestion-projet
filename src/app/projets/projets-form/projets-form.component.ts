@@ -41,19 +41,21 @@ getCurrentUSer(){
   );
 }
   resetForm(form?: NgForm) {
-    if (form != null)
-      form.resetForm();
+    if (form != null) {
+    form.resetForm();
+    }
     this.projetsService.formData = {
       id: null,
       nomProjet: '',
       descriptionProjet: '',
       createdBy: this.currentUser,
+      taches: [],
     }
   }
   onSubmit(form: NgForm) {
     let data = Object.assign({createdBy: this.currentUser},  form.value);
     delete data.id;
-    if (form.value.id == null){
+    if (form.value.id == null) {
       this.db.collection('projets').add(data);
       this.toastr.success('Projet Enregistré avec succés ', 'Enregistrement');
     }

@@ -58,7 +58,7 @@ export class ProjetsListComponent implements OnInit {
   onDelete(id: string) {
     if (confirm('Voulez-vous vraiment supprimer ce projet ?')) {
       this.projetsService.deleteProjet(id).then( res => {
-        this.toastr.warning('Projet supprimer avec succès', 'Suppression');
+        this.toastr.warning('Projet supprimé avec succès', 'Suppression');
       });
     }
   }

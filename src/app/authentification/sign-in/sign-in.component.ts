@@ -8,9 +8,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
+
 export class SignInComponent implements OnInit {
   signInForm: FormGroup;
   errorMessage: string;
+  hide = true;
+
 
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,

@@ -46,19 +46,12 @@ onSubmit() {
       .then(
           (res) => {
             this.usersService.addUser(res.user.uid, nom, prenom, email);
+            this.router.navigate(['/utilisateurs']);
           },
           (error) => {
             this.errorMessage = error;
           }
-      )
-      .then(
-      () => {
-        this.router.navigate(['/utilisateurs']);
-      },
-    (error) => {
-      this.errorMessage = error;
-    }
-  );
+      );
 }
 
 }

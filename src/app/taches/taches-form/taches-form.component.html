@@ -1,3 +1,27 @@
-<p>
-  taches-form works!
-</p>
+<mat-card-content class="container-form" >
+  <mat-card-title>Créer une tâche</mat-card-title>
+  <form  (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <mat-form-field>
+      <input id="nomTache"   name="nomTache" matInput placeholder="Entrer le nom de la tâche" required>
+    </mat-form-field>
+    <mat-form-field >
+        <textarea id="descriptionTache"  name="descriptionTache" matInput placeholder="Description de la tâche"></textarea>
+      </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Personne(s) en charge" [formControl]="usersEnCharge" multiple>
+      <mat-option *ngFor="let user of users" [value]="user">{{user.prenom}}- {{user.nom}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <button mat-raised-button class="add-button">
+      <mat-icon>add_circle_outline</mat-icon> créer
+    </button>
+
+  </form>
+</mat-card-content>
+
+
+{{usersEnCharge.value | json}}
+

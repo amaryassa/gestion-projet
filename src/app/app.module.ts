@@ -1,3 +1,4 @@
+import { MaterialModule } from './material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -28,6 +29,8 @@ import { TachesListComponent } from './taches/taches-list/taches-list.component'
 import { TachesFormComponent } from './taches/taches-form/taches-form.component';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +55,8 @@ import { TachesFormComponent } from './taches/taches-form/taches-form.component'
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

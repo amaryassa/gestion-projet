@@ -1,0 +1,34 @@
+.container-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  max-width: 550px;
+  width: 100%;
+  margin: auto;
+}
+
+.container-form > * > *{
+  width: 100%;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+
+  .login-button{
+      width: 100%;
+      padding:1.5% !important;
+      background-color: #4CAF50;
+      font-size: 1.5em;
+      color: #fff !important;
+  }
