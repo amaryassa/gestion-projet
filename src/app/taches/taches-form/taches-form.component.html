@@ -1,21 +1,56 @@
 <mat-card-content class="container-form" >
   <mat-card-title>Créer une tâche</mat-card-title>
-  <form  (ngSubmit)="onSubmit()" autocomplete="off">
+  <form [formGroup]="registrationForm"  (ngSubmit)="onSubmit()" autocomplete="off">
 
     <mat-form-field>
-      <input id="nomTache"   name="nomTache" matInput placeholder="Entrer le nom de la tâche" required>
+      <input formControlName="nomTache" id="nomTache"   name="nomTache" matInput placeholder="Entrer le nom de la tâche" required>
+      <mat-hint *ngIf="registrationForm.get('nomTache').hasError('required') && registrationForm.get('nomTache').touched ">
+        <span class="mat-error">champ obligatoire</span>
+      </mat-hint>
+      <mat-hint *ngIf="registrationForm.get('nomTache').hasError('minlength') || registrationForm.get('nomTache').hasError('maxlength')">
+        <span class="mat-error">Min 5 carac. max 100 carac.</span>
+      </mat-hint>
     </mat-form-field>
     <mat-form-field >
-        <textarea id="descriptionTache"  name="descriptionTache" matInput placeholder="Description de la tâche"></textarea>
+        <textarea formControlName="descriptionTache" id="descriptionTache"  name="descriptionTache" matInput placeholder="Description de la tâche"></textarea>
+        <mat-hint *ngIf="registrationForm.get('descriptionTache').errors?.required && registrationForm.get('descriptionTache').touched ">
+          <span class="mat-error">champ obligatoire</span>
+        </mat-hint>
+        <mat-hint *ngIf="registrationForm.get('descriptionTache').errors?.minlength ">
+          <span class="mat-error">Min 20 carac.</span>
+        </mat-hint>
+
       </mat-form-field>
+
     <mat-form-field>
-      <mat-select placeholder="Personne(s) en charge" [formControl]="usersEnCharge" multiple>
-      <mat-option *ngFor="let user of users" [value]="user">{{user.prenom}}- {{user.nom}}</mat-option>
+      <mat-select  formControlName="usersEnCharge" id="usersEnCharge" name="usersEnCharge" placeholder="Personne(s) en charge" multiple>
+        <mat-option *ngFor="let user of users" [value]="user">{{user.prenom}}- {{user.nom}}</mat-option>
       </mat-select>
+      <mat-hint *ngIf="registrationForm.get('usersEnCharge').hasError('required') && registrationForm.get('usersEnCharge').touched ">
+        <span class="mat-error">champ obligatoire <strong>(choisir au moins une personne)</strong></span>
+      </mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select  formControlName="typeTache" id="typeTache" name="typeTache" placeholder="Type de la tâche">
+        <mat-option *ngFor="let type of typeTache" [value]="type">{{type}}</mat-option>
+      </mat-select>
+      <mat-hint *ngIf="registrationForm.get('typeTache').hasError('required') && registrationForm.get('typeTache').touched ">
+        <span class="mat-error">champ obligatoire <strong>(choisir au moins un Type)</strong></span>
+      </mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select  formControlName="prioriteTache" id="prioriteTache" name="prioriteTache" placeholder="Priorité de la tâche">
+        <mat-option *ngFor="let type of prioriteTache" [value]="type">{{type}}</mat-option>
+      </mat-select>
+      <mat-hint *ngIf="registrationForm.get('prioriteTache').hasError('required') && registrationForm.get('prioriteTache').touched ">
+        <span class="mat-error">champ obligatoire <strong>(choisir au moins un Type)</strong></span>
+      </mat-hint>
     </mat-form-field>
 
 
-    <button mat-raised-button class="add-button">
+    <button  [disabled]="!registrationForm.valid" type="submit" mat-raised-button class="add-button">
       <mat-icon>add_circle_outline</mat-icon> créer
     </button>
 
@@ -23,5 +58,8 @@
 </mat-card-content>
 
 
-{{usersEnCharge.value | json}}
+<!-- {{registrationForm.value | json}} -->
+<!-- {{usersEnCharge.value | json}} -->
 
+
+{{registrationForm.get('nomTache').valid | json }}

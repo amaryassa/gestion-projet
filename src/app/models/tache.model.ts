@@ -4,7 +4,10 @@ export class Tache {
     public id: string,
     public nomTache: string,
     public descriptionTache: string,
-    public createdBy: string,
-    public destination: string
+    public usersEnCharge: User[],
+    public typeTache: string,
+    public prioriteTache: string,
+    public createdBy: User
+
   ) {}
 }
