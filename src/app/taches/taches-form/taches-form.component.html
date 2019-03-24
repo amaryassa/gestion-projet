@@ -1,9 +1,12 @@
 <mat-card-content class="container-form" >
   <mat-card-title>Créer une tâche</mat-card-title>
-  <form [formGroup]="registrationForm"  (ngSubmit)="onSubmit()" autocomplete="off">
+  <form [formGroup]="registrationForm"
+        #formDirective="ngForm"
+        (ngSubmit)="onSubmit(formDirective)"
+        autocomplete="off">
 
     <mat-form-field>
-      <input formControlName="nomTache" id="nomTache"   name="nomTache" matInput placeholder="Entrer le nom de la tâche" required>
+      <input oninput="this.value = this.value.toLowerCase()" formControlName="nomTache" id="nomTache"   name="nomTache" matInput placeholder="Entrer le nom de la tâche" required>
       <mat-hint *ngIf="registrationForm.get('nomTache').hasError('required') && registrationForm.get('nomTache').touched ">
         <span class="mat-error">champ obligatoire</span>
       </mat-hint>
@@ -12,7 +15,7 @@
       </mat-hint>
     </mat-form-field>
     <mat-form-field >
-        <textarea formControlName="descriptionTache" id="descriptionTache"  name="descriptionTache" matInput placeholder="Description de la tâche"></textarea>
+        <textarea oninput="this.value = this.value.toLowerCase()" formControlName="descriptionTache" id="descriptionTache"  name="descriptionTache" matInput placeholder="Description de la tâche"></textarea>
         <mat-hint *ngIf="registrationForm.get('descriptionTache').errors?.required && registrationForm.get('descriptionTache').touched ">
           <span class="mat-error">champ obligatoire</span>
         </mat-hint>
@@ -62,4 +65,4 @@
 <!-- {{usersEnCharge.value | json}} -->
 
 
-{{registrationForm.get('nomTache').valid | json }}
+<!-- {{registrationForm.get('nomTache').valid | json }} -->

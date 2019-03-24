@@ -17,8 +17,9 @@ export class TachesService {
   UpdateTaches(id: string , taches: Tache[]) {
     return this.db.collection('projets').doc(id).update({taches: taches});
   }
+
   AddTaches(id, data) {
-    this.db.collection('projets').doc(id).collection('taches').add(data);
+    return this.db.collection('projets').doc(id).collection('taches').add(data);
   }
 
 

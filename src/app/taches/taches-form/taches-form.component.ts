@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/models/User.model';
 import { UsersService } from 'src/app/services/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -17,14 +18,15 @@ export class TachesFormComponent implements OnInit {
   users: User[] ;
   public idProjet: string;
   formErrors: any;
-  typeTache: any = ['Bug', 'Tache'];
-  prioriteTache: any = ['Urgent', 'Normal'];
+  typeTache: any = ['bug', 'tache'];
+  prioriteTache: any = ['urgent', 'normal'];
   currentUser: User;
+
 
   constructor(  private route: ActivatedRoute,
                 private _usersService: UsersService,
                 private _tachesService: TachesService,
-                private db: AngularFirestore,
+                private toastr: ToastrService,
                 private formBuilder: FormBuilder,
                 private afAuth:  AngularFireAuth
 
@@ -73,17 +75,20 @@ export class TachesFormComponent implements OnInit {
       );
     }
 
-    onSubmit() {
+    onSubmit(formDirective) {
       // console.log(this.registrationForm.value);
-      let data = Object.assign({createdBy: this.currentUser },this.registrationForm.value);
+      let data = Object.assign({createdBy: this.currentUser, statut: 'non commencée', progress: '0' }, this.registrationForm.value);
 
-      console.log(data)
-      this.db.collection('projets').doc(this.idProjet).collection('taches').add(data);
-        // this._tachesService.AddTaches(this.idProjet, data);
-       /*  .subscribe(
-          response => console.log('Success!', response),
-          error => console.error('Error!', error)
-        ); */
+      // console.log(data);
+      this._tachesService.AddTaches(this.idProjet, data).then(
+        res => {
+                this.registrationForm.reset();
+                formDirective.resetForm();
+this.toastr.success('Tâche ajoutée avec succès ', 'Enregistrement');
+              },
+        err => {console.error(err)}
+        )
+
     }
 
 

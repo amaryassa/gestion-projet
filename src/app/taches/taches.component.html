@@ -1,22 +1,21 @@
-<h1> id projet : {{idProjet}}</h1>
+<div class="row information-projet">
+  <h1 class="title-projet">{{projet?.nomProjet}}</h1>
+  <div class="col-md-12">  Projet crée par : <b>{{projet?.createdBy.prenom}} - {{projet?.createdBy.nom}}</b></div>
+  <div class="col-md-12">Description: <b> {{projet?.descriptionProjet}}</b></div>
+</div>
+<br>
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-4 marginB30">
       <app-taches-form></app-taches-form>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-8">
       <app-taches-list></app-taches-list>
     </div>
   </div>
 
 
-  <!-- <h1> id projet : {{idProjet}}</h1> -->
 
 
-<!-- {{taches |  json}} -->
-<!--
-<ul *ngFor="let tache of taches "  >
-<li>{{tache.nomtache}}</li>
-<li>{{tache.nomTache}}</li>
+<!-- {{projet |  json}} -->
 
-</ul> -->
 

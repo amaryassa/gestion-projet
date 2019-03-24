@@ -1,26 +1,59 @@
-<table class="table table-hover">
-  <thead>
-  <th>nom Projet</th>
-  <th>description Projet</th>
-  <th>create By</th>
-  <th>Consulter</th>
-  <th>Suppression</th>
+<h1>Liste des projets</h1>
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Rechercher">
+</mat-form-field>
 
-  </thead>
-      <tbody>
-        <!-- <tr [ngClass]="{'amar': (currentUser?.id=== projet.createdBy.id) || (currentUser?.email=== projet.createdBy.email)}"   *ngFor="let projet of projets"> -->
-        <tr [ngClass]="((currentUser?.id=== projet.createdBy.id) || (currentUser?.email=== projet.createdBy.email))? 'MyProject' : '' "   *ngFor="let projet of projets">
-          <td (click)="onEdit(projet)" >{{projet.nomProjet}}</td>
-          <td (click)="onEdit(projet)" >{{projet.descriptionProjet}}</td>
-          <td (click)="onEdit(projet)" >{{projet.createdBy?.prenom}}</td>
-          <td (click)="onConsulte(projet)" ><i style='color:#28a745' class="far fa-arrow-alt-circle-right"></i></td>
-          <td *ngIf="(currentUser?.id=== projet.createdBy.id) || (currentUser?.email=== projet.createdBy.email) "  title='Delete' (click)="onDelete(projet.id)" >
-              <button  mat-mini-fab color="warn" class="dropdown-toggle account-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <mat-icon aria-label="icon-button"> delete </mat-icon>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
 
+      <!-- Name Column -->
+      <ng-container matColumnDef="nomProjet">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> nom </th>
+        <td (click)="onConsulte(row)" title="Voir les détails de ce projet" mat-cell *matCellDef="let row"> {{row.nomProjet}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="createdBy">
+        <th mat-header-cell *matHeaderCellDef > créé par</th>
+        <td (click)="onConsulte(row)" title="Voir les détails de ce projet" mat-cell *matCellDef="let row"> {{row.createdBy.prenom}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="descriptionProjet">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> description </th>
+          <td (click)="onConsulte(row)" title="Voir les détails de ce projet" mat-cell *matCellDef="let row"> {{row.descriptionProjet}} </td>
+      </ng-container>
+      <ng-container matColumnDef="modification">
+          <th class="align-center" mat-header-cell *matHeaderCellDef > Modification </th>
+          <td  class="align-center" mat-cell *matCellDef="let row">
+              <button
+              mat-mini-fab
+              color="primary"
+              *ngIf="(currentUser?.id=== row.createdBy.id) || (currentUser?.email=== row.createdBy.email) "
+              title='Modification' (click)="onEdit(row)"
+              >
+                <mat-icon aria-label="icon-button"> edit </mat-icon>
           </button>
-            </td>
-        </tr>
-      </tbody>
-  </table>
+          </td>
+      </ng-container>
+      <ng-container matColumnDef="suppression">
+          <th class="align-center" mat-header-cell *matHeaderCellDef> Suppresssion </th>
+          <td  class="align-center" mat-cell *matCellDef="let row" >
+            <button
+              mat-mini-fab
+              color="warn"
+              *ngIf="(currentUser?.id=== row.createdBy.id) || (currentUser?.email=== row.createdBy.email) "
+              title='Delete' (click)="onDelete(row.id)"
+              >
+                <mat-icon aria-label="icon-button"> delete </mat-icon>
+          </button>
+          </td>
+      </ng-container>
 
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+
+    <mat-paginator  [pageSizeOptions]="[6, 20, 30, 100]"> </mat-paginator>
+  </div>

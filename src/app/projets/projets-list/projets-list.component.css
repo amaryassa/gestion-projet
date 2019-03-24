@@ -5,5 +5,8 @@ tbody> tr:hover{
   background-color: blanchedalmond;
   cursor: pointer;
 }
-
+td, th {
+  width: 25%;
+  padding: 0 7px !important;
+}
 

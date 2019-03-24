@@ -15,7 +15,7 @@ export class TachesListComponent implements OnInit {
   public idProjet: string;
   // public taches: Tache[];
   public taches: any;
-  displayedColumns: string[] = ['id', 'nomTache', 'descriptionTache'];
+  displayedColumns: string[] = ['nomTache', 'usersEnCharge', 'statut', 'progress', 'typeTache', 'prioriteTache'] ;
   dataSource: MatTableDataSource <Tache>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -31,14 +31,13 @@ export class TachesListComponent implements OnInit {
     this.idProjet = id;
     this.tachesService.getTaches(id).subscribe(actionArray => {
       this.taches = actionArray.map(item => {
-        console.log(item.payload);
+        // console.log(item.payload);
         return {
           id: item.payload.doc.id,
           ...item.payload.doc.data()
         };
       });
       this.dataSource = new MatTableDataSource(this.taches);
-
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
 
@@ -51,6 +50,6 @@ export class TachesListComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  };
+  }
 
 }

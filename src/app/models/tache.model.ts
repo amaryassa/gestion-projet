@@ -7,7 +7,9 @@ export class Tache {
     public usersEnCharge: User[],
     public typeTache: string,
     public prioriteTache: string,
-    public createdBy: User
+    public createdBy: User,
+    public statut: string,
+    public progress: number,
 
   ) {}
 }

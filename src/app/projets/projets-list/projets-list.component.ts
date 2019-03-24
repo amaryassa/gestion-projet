@@ -1,7 +1,8 @@
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from './../../models/User.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {ProjetsService} from '../../services/projets.service';
 import {Projet} from '../../models/projet.model';
@@ -15,6 +16,13 @@ import { UsersService } from 'src/app/services/users.service';
 export class ProjetsListComponent implements OnInit {
   projets: Projet[];
   currentUser: User;
+  displayedColumns: string[] = ['nomProjet', 'createdBy', 'descriptionProjet', 'modification', 'suppression'] ;
+  dataSource: MatTableDataSource <Projet>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+
+
   constructor(private projetsService: ProjetsService,
               private usersService: UsersService,
               private afAuth:  AngularFireAuth,
@@ -32,14 +40,23 @@ export class ProjetsListComponent implements OnInit {
           ...item.payload.doc.data()
         } as Projet;
       });
+      // console.log(this.projets)
+      this.dataSource = new MatTableDataSource(this.projets);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
 
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   onEdit(projet: Projet) {
     this.projetsService.formData = Object.assign({}, projet);
-
   }
 
   getCurrentUSer(){

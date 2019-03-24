@@ -57,12 +57,12 @@ getCurrentUSer(){
     delete data.id;
     if (form.value.id == null) {
       this.db.collection('projets').add(data);
-      this.toastr.success('Projet Enregistré avec succés ', 'Enregistrement');
+      this.toastr.success('Projet Enregistré avec succès ', 'Enregistrement');
     }
     else {
       delete data.createdBy;
       this.db.doc('projets/' + form.value.id).update(data);
-      this.toastr.success( 'Projet Modifié avec succés ', 'Modification');
+      this.toastr.success( 'Projet Modifié avec succès ', 'Modification');
     }
     this.resetForm(form);
   }

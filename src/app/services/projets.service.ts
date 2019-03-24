@@ -16,4 +16,8 @@ export class ProjetsService {
   deleteProjet(id: string) {
     return this.db.doc('projets/' + id).delete();
   }
+
+  getOneProjet(id) {
+    return this.db.collection('projets').doc(id).get();
+}
 }
