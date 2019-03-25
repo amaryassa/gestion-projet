@@ -35,3 +35,8 @@ tr{
 }
 tr:nth-child(even) {background-color: #f2f2f27a}
 tr:hover {background-color:#38a2ca14;}
+
+
+.mat-elevation-z8{
+  overflow-x: scroll
+}

@@ -46,7 +46,7 @@ onSubmit() {
       .then(
           (res) => {
             this.usersService.addUser(res.user.uid, nom, prenom, email);
-            this.router.navigate(['/utilisateurs']);
+            this.router.navigate(['/projets']);
           },
           (error) => {
             this.errorMessage = error;

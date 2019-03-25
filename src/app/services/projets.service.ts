@@ -10,6 +10,15 @@ export class ProjetsService {
   formData: Projet;
   constructor(private db: AngularFirestore) { }
 
+  sharedProjet: Projet;
+
+  getShareProjet() {
+    return this.sharedProjet;
+  }
+  setShareProjet(projet: Projet) {
+    this.sharedProjet = projet;
+  }
+
   getProjets() {
     return this.db.collection('projets').snapshotChanges();
   }

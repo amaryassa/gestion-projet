@@ -9,15 +9,29 @@ export class TachesService {
 
   constructor(private db: AngularFirestore) { }
 
+  sharedTache: Tache;
+
+  getShareTache() {
+    return this.sharedTache;
+  }
+  setShareTache(tache: Tache){
+    this.sharedTache = tache;
+  }
+
+
   getTaches(id) {
     // return this.db.collection('projets').doc(id).collection('taches').valueChanges();
     return this.db.collection('projets').doc(id).collection('taches').snapshotChanges();
   }
 
+  getOneTache(idProjet, idTache) {
+    return this.db.collection('projets').doc(idProjet).collection('taches').doc(idTache).get();
+  }
+
+
   UpdateTaches(id: string , taches: Tache[]) {
     return this.db.collection('projets').doc(id).update({taches: taches});
   }
-
   AddTaches(id, data) {
     return this.db.collection('projets').doc(id).collection('taches').add(data);
   }

@@ -27,6 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { TachesComponent } from './taches/taches.component';
 import { TachesListComponent } from './taches/taches-list/taches-list.component';
 import { TachesFormComponent } from './taches/taches-form/taches-form.component';
+import { TacheDetailsComponent } from './taches/tache-details/tache-details.component';
 
 
 
@@ -43,7 +44,8 @@ import { TachesFormComponent } from './taches/taches-form/taches-form.component'
     ProjetsFormComponent,
     TachesComponent,
     TachesListComponent,
-    TachesFormComponent
+    TachesFormComponent,
+    TacheDetailsComponent
   ],
   imports: [
     BrowserModule,

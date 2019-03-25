@@ -1,0 +1,28 @@
+<div class="row information-projet">
+  <h1 class="title-projet">{{projet?.nomProjet}}</h1>
+  <div class="col-md-12">  Projet crée par : <b>{{projet?.createdBy.prenom}} - {{projet?.createdBy.nom}}</b></div>
+  <div class="col-md-12">Description: <b> {{projet?.descriptionProjet}}</b></div>
+</div>
+<br>
+
+
+<section>
+  <label >Progress:</label>
+  <mat-slider class="example-margin" [(ngModel)]="tache.progress" #amar ></mat-slider> {{amar.value}}
+</section>
+<section class="example-section">
+  <mat-progress-bar
+      [value]="tache.progress"
+  >
+  </mat-progress-bar>
+</section>
+
+
+createdBy: {{tache.createdBy.prenom}} <br>
+descriptionTache: {{tache.descriptionTache}} <br>
+nomTache: {{tache.nomTache}} <br>
+prioriteTache: {{tache.prioriteTache}} <br>
+progress: {{tache.progress}} <br>
+
+statut: {{tache.statut}} <br>
+typeTache: {{tache.typeTache}} <br>

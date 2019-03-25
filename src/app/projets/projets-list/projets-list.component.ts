@@ -23,8 +23,8 @@ export class ProjetsListComponent implements OnInit {
 
 
 
-  constructor(private projetsService: ProjetsService,
-              private usersService: UsersService,
+  constructor(private _projetsService: ProjetsService,
+              private _usersService: UsersService,
               private afAuth:  AngularFireAuth,
               private toastr: ToastrService,
               private router: Router
@@ -32,7 +32,7 @@ export class ProjetsListComponent implements OnInit {
 
   ngOnInit() {
     this.getCurrentUSer();
-    this.projetsService.getProjets().subscribe(actionArray => {
+    this._projetsService.getProjets().subscribe(actionArray => {
       this.projets = actionArray.map(item => {
         // console.log(item.payload.doc.data());
         return {
@@ -56,14 +56,14 @@ export class ProjetsListComponent implements OnInit {
   }
 
   onEdit(projet: Projet) {
-    this.projetsService.formData = Object.assign({}, projet);
+    this._projetsService.formData = Object.assign({}, projet);
   }
 
   getCurrentUSer(){
     this.afAuth.auth.onAuthStateChanged(
         (user) => {
           if (user) {
-            this.usersService.getOneUser(user.uid)
+            this._usersService.getOneUser(user.uid)
                 .subscribe(item => {
                   this.currentUser  = Object.assign({id: user.uid},  item.data());
                 });
@@ -74,14 +74,16 @@ export class ProjetsListComponent implements OnInit {
 
   onDelete(id: string) {
     if (confirm('Voulez-vous vraiment supprimer ce projet ?')) {
-      this.projetsService.deleteProjet(id).then( res => {
+      this._projetsService.deleteProjet(id).then( res => {
         this.toastr.warning('Projet supprimé avec succès', 'Suppression');
       });
     }
   }
 
   onConsulte(projet: Projet){
+    this._projetsService.setShareProjet(projet);
     this.router.navigate(['/projets', projet.id]);
+
   }
 }
 

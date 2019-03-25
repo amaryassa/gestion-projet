@@ -18,7 +18,8 @@ import {MatButtonModule,
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatSliderModule
       } from '@angular/material';
 
 
@@ -43,7 +44,8 @@ const MaterialComponents =[
   MatPaginatorModule,
   MatTableModule,
   MatSortModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatSliderModule
 ]
 @NgModule({
   imports: [MaterialComponents],

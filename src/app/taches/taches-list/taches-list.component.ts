@@ -23,13 +23,13 @@ export class TachesListComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private db: AngularFirestore,
-              private tachesService: TachesService
+              private _tachesService: TachesService,
       ) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.idProjet = id;
-    this.tachesService.getTaches(id).subscribe(actionArray => {
+    this._tachesService.getTaches(id).subscribe(actionArray => {
       this.taches = actionArray.map(item => {
         // console.log(item.payload);
         return {
@@ -42,6 +42,13 @@ export class TachesListComponent implements OnInit {
       this.dataSource.sort = this.sort;
 
     });
+  }
+  onNavigateDetail(tache: Tache){
+    console.log('tache: ', tache);
+    this._tachesService.setShareTache(tache);
+
+     this.router.navigate(['/projets', this.idProjet, 'datails-tache', tache.id]);
+
   }
 
   applyFilter(filterValue: string) {

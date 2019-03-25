@@ -22,9 +22,13 @@ export class TachesComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.idProjet = id;
-    this._projetsService.getOneProjet(this.idProjet).subscribe(item =>{
-          this.projet = item.data();
-    })
+    if(this._projetsService.getShareProjet() === undefined){
+      this._projetsService.getOneProjet(this.idProjet).subscribe(item =>{
+        this.projet = item.data() as Projet;
+      });
+    } else {
+    this.projet = this._projetsService.getShareProjet() as Projet;
+  }
 
 
   }
