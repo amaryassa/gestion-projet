@@ -93,6 +93,17 @@ this.toastr.success('Tâche ajoutée avec succès ', 'Enregistrement');
 
 
 
+      onUploadFile(file: File){
+          this._tachesService.uploadFile(file).then(
+            (url: string) => {
+                console.log(url);
+            }
+          );
+      }
+      detectFileEvent(event){
+         this.onUploadFile(event.target.files[0]);
+      }
+
 
 }
 

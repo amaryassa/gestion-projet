@@ -52,6 +52,11 @@
       </mat-hint>
     </mat-form-field>
 
+    <div class="form-group">
+      <h4>ajouter une photo</h4>
+      <input type="file" (change)="detectFileEvent($event)" class="form-control" accept="image/*">
+    </div>
+
 
     <button  [disabled]="!registrationForm.valid" type="submit" mat-raised-button class="add-button">
       <mat-icon>add_circle_outline</mat-icon> créer

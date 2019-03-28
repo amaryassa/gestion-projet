@@ -1,13 +1,16 @@
 import { Tache } from './../models/tache.model';
 import { AngularFirestore } from '@angular/fire/firestore';
+
 import { Injectable } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/internal/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TachesService {
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore, private AFS: AngularFireStorage) { }
 
   sharedTache: Tache;
 
@@ -34,6 +37,20 @@ export class TachesService {
   }
   AddTaches(id, data) {
     return this.db.collection('projets').doc(id).collection('taches').add(data);
+  }
+
+  uploadFile(file: File){
+    return new Promise(
+      (resolve, reject) => {
+        const uniqueFileName = Date.now().toString();
+       const filePath = 'images/' + uniqueFileName + file.name;
+       const fileRef = this.AFS.ref(filePath);
+       const task = this.AFS.upload(filePath, file);
+       task.snapshotChanges().pipe(
+        finalize(() => resolve(fileRef.getDownloadURL()) )
+       );
+      }
+    );
   }
 
 
