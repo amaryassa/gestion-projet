@@ -1,0 +1,17 @@
+<mat-card-content class="container-form">
+  <mat-card-title>Ajouter un Commentaire</mat-card-title>
+  <form
+    [formGroup]="registrationForm"
+    #formDirective="ngForm"
+    (ngSubmit)="onSubmit(formDirective)"
+    autocomplete="off"
+  >
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Commentaire ..." formControlName="commentTache" id="commentTache"   name="commentTache"></textarea>
+    </mat-form-field>
+    <button mat-raised-button class="submit-button">
+      <!-- <button mat-raised-button class="submit-button" > -->
+      <mat-icon>input</mat-icon> Commenter
+    </button>
+  </form>
+</mat-card-content>

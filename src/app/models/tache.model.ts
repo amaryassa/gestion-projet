@@ -1,3 +1,4 @@
+import { Commente } from './Commente.model';
 import { User } from './User.model';
 export class Tache {
   constructor(
@@ -10,6 +11,7 @@ export class Tache {
     public createdBy: User,
     public statut: string,
     public progress: number,
+    public commente: Commente[],
 
   ) {}
 }

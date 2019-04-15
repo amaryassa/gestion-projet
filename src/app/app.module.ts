@@ -28,6 +28,9 @@ import { TachesComponent } from './taches/taches.component';
 import { TachesListComponent } from './taches/taches-list/taches-list.component';
 import { TachesFormComponent } from './taches/taches-form/taches-form.component';
 import { TacheDetailsComponent } from './taches/tache-details/tache-details.component';
+import { CommentsComponent } from './comments/comments.component';
+import { CommentsListComponent } from './comments/comments-list/comments-list.component';
+import { CommentsFormComponent } from './comments/comments-form/comments-form.component';
 
 
 
@@ -45,7 +48,10 @@ import { TacheDetailsComponent } from './taches/tache-details/tache-details.comp
     TachesComponent,
     TachesListComponent,
     TachesFormComponent,
-    TacheDetailsComponent
+    TacheDetailsComponent,
+    CommentsComponent,
+    CommentsListComponent,
+    CommentsFormComponent
   ],
   imports: [
     BrowserModule,
